@@ -1,0 +1,161 @@
+#yeah{
+    background-color: gray;
+    font-weight: bolder;
+}
+#nope{
+    background-color: lightgray;
+}
+body{
+    display: grid;
+    grid-template-columns: 30% auto;
+}
+.lateral{
+    display: block;
+    background-color: lightgray;
+    display: flex;
+    padding: 0%;
+    height: 120vh;
+    flex-direction: column;
+    transition: display 1s;
+}
+.lateral > button{
+    width: 100%;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom-width: thin;
+    height: 10%;
+}
+.lateral > button:first-child{
+    margin-top: 30%;
+    border-top: solid;
+    border-top-width: thin;
+}
+.datosPersonales, form, select{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10%;   
+    width: 60%;
+}
+select{
+    padding: 16px 0;
+    margin-bottom: 10%;
+    outline: none;
+}
+.datosPersonales > form > input{
+    margin: 10pt;
+    padding: 5pt;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+}
+.datosPersonales > form > input:focus{
+    outline: none;
+}
+label{
+    margin-top: 10pt;
+}
+input[type="submit"]:disabled{
+    padding: 10pt;
+    background-color: rgb(194, 194, 194);
+    color: black;
+    font-weight: 700;
+    border-bottom: none;
+
+}
+input[type="submit"]:enabled{
+    padding: 10pt;
+    background-color: rgb(0, 195, 255);
+    color: white;
+    font-weight: 700;
+    border-bottom: none;
+
+}
+
+.valid{color: rgb(2, 192, 2)}
+.error{color: red;}
+.oculto{
+    display: none;
+}
+.visible{
+    display: block;
+}
+button:hover, input[type="submit"], select, select > option{
+    cursor: pointer;
+}
+.campeonatoHistorial{
+    list-style: none;
+    padding-top: 15pt;
+    padding-bottom: 10pt;
+    padding-left: 10pt;
+    padding-right: 40pt;
+    border: solid,black;
+    border-width: thin;
+    display: grid;
+    grid-template-columns: 95% auto;
+}
+
+.campeonatoHistorial > .girar{
+    border: solid, black;
+    border-width: thin;
+    border-radius: 50%;
+    width: 20pt;
+    height: 20pt;
+    text-align: center;
+    font-size: 15pt;
+    transition: transform 0.2s;
+    padding: 1%;
+}
+.campeonatoHistorial > .girar:hover{
+    cursor: pointer;
+}
+.datos:hover{
+    cursor: default;
+}
+.campeonatoHistorial:hover{
+    cursor: pointer;
+}
+.campeonatoHistorial > p{
+    white-space: nowrap;
+    padding-top:5pt ;
+}
+.campeonatoHistorial2 > .campeonato{
+    padding-top: 21pt;
+}
+.campeonatoHistorial2{
+    list-style: none;
+    padding-top: 15pt;
+    padding-bottom: 10pt;
+    padding-left: 10pt;
+    padding-right: 40pt;
+    border: solid,black;
+    border-width: thin;
+    display: grid;
+    grid-template-columns:60% 40%;
+}
+.sub{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sub > button{
+    padding: 15pt;
+}
+@media(min-width:678px){
+    .campeonatoHistorial2{
+        white-space: nowrap;
+    }
+}
+.cancelar{
+    background-color: red;
+    color: white;
+    font-size: 14pt;
+    border: none;
+}
+.apuntar{
+    background-color: blue;
+    color: white;
+    font-size: 14pt;
+    border: none;
+}

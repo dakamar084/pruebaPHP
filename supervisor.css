@@ -1,0 +1,127 @@
+#main {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 30pt;
+    padding: 20pt;
+}
+
+#main > button {
+    margin-left: 20%;
+    min-width: 200px;
+    border: none;
+    padding-top: 20pt;
+    padding-bottom: 20pt;
+    font-size: 14pt;
+    background-color: rgb(0, 195, 255);
+    width: 40%;
+    color: white;
+    border-radius: 12pt;
+    text-shadow: 2px 1px 3px black;
+    cursor: pointer;
+}
+
+#modal {   
+    position: fixed;
+    top: 0pt;
+    right: 46%;
+    transform: translate(30%, 50%);
+    background-color: white;
+    padding: 30pt;
+    border: solid black thin;
+    width: 70%;
+    max-width: 576px;
+    height: fit-content;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 15pt;
+    display: none; /* Mantenemos el display:none inicial */
+}
+
+#modal > h3 {
+    margin: 0;
+}
+
+#modal > select {
+    width: 100%;
+    padding: 15pt;
+}
+
+#modal > select:focus {
+    outline: none;
+}
+
+#modal > img {
+    width: 5%;
+    position: fixed;
+    min-width: 30px;
+    cursor: pointer;
+    top: 5pt;
+    right: 10pt;
+}
+
+#modal > button:disabled {
+    cursor: not-allowed;
+    margin-top: 10pt;
+    padding: 15pt;
+    background-color: lightgray;
+    color: black;
+    border: none;
+    font-size: 15pt;
+    border-radius:15pt;
+}
+
+#modal > button:enabled {
+    cursor: pointer;
+    margin-top: 10pt;
+    padding: 15pt;
+    background-color: blue;
+    color: white;
+    border: none;
+    font-size: 15pt;
+    border-radius:15pt;
+}
+
+.participante {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    padding: 10pt;
+}
+
+.participante > img {
+    width: 50%;
+    background-color: red;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.participantes {
+    border: solid black thin;
+    max-height: 130pt;
+    overflow-y: auto;
+}
+.accion > p{
+    color: red;
+    margin-top: 5pt;
+}
+.accion > button{
+    padding: 12pt 30pt;
+    font-size: 14pt;
+    background-color: lightgreen;
+    border: none;
+    margin-top: 8pt;
+    color: white;
+    text-shadow: 2px 1px 3px black;
+    text-transform: capitalize;
+    border-radius: 15pt;
+    cursor: pointer;
+}
+.participantes hr:last-child{
+    display: none;
+}
+.accion > button:disabled{
+    background-color: lightgray;
+    color: black;
+    cursor: not-allowed;
+    text-shadow: none;
+}

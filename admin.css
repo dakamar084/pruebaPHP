@@ -1,0 +1,267 @@
+body{
+    display: grid;
+    grid-template-columns: 30% auto;
+    overflow: hidden;
+}
+.botones{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: lightgray;
+}
+.botones > *{
+    margin-top: 15pt;
+    border: solid, thin;
+    padding: 15pt;
+    background-color: lightgray;
+}
+option{
+    padding: 15pt;
+    background-color: lightgray;
+    text-align: center;
+}
+.botones > button:first-child{
+    margin-top: 30%;
+}
+select:focus{
+    outline: none;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 0 !important;
+    width: 50px;
+    height: 24px;
+}
+
+/* Ocultamos el checkbox */
+.switch input {
+    display: none;
+}
+
+/* Estilizamos el fondo del interruptor */
+.switch label {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #ccc;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+/* Creación del círculo deslizante */
+.switch label:before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s;
+}
+
+/* Cuando está activado (checked) */
+.switch input:checked + label {
+    background: #4caf50;
+}
+
+.switch input:checked + label:before {
+    transform: translateX(26px);
+}
+form{
+    display: flex;
+    flex-direction: column;
+    margin-left: 15pt;
+    min-width: 400px;
+}
+
+form > *{
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    margin: 5pt;
+    width: 50%;
+    padding: 10pt;
+}
+form > div > input[type="date"]{
+    border-top: none;
+    border-left: none;border-right: none;
+    margin: 5pt;
+    width: 30%;
+    padding: 10pt;
+}
+input:focus{
+    outline: none;
+}
+form > div >select{
+    width: 74%;
+    padding-top: 15pt;
+    padding-bottom: 15pt;
+    text-align: left;
+}
+form > button, input[type="submit"]{
+    border: none;
+    background-color: rgb(0, 193, 252);
+    color: white;
+    font-weight: 700;
+}
+button, input[type="submit"],select{
+    cursor: pointer;
+}.derecha {
+    position: fixed;
+    right: 4%;
+    top: 12%;
+    display: flex;
+    flex-direction: column;
+    width: 24%;
+}
+.ListaSupervisores{
+    display: flex;
+    flex-direction: column;
+}
+.ListaSupervisores > button{
+    padding: 15pt;
+    margin-top: 15pt;
+    background-color: rgb(0, 193, 252);
+    color: white;
+    border: none;
+    font-weight: 700;
+}
+.derecha > *:last-child{
+    margin-top: 30pt;
+}
+@media(max-width:900px){
+    .derecha{
+        display: grid;
+        top: inherit;
+        right: inherit;
+        width: 58%;
+        /* flex-direction: column; */
+        grid-template-columns: 50% 50%;
+        gap: 20pt;
+        height: 30%;
+    }
+}
+.botonesJornadas > button{
+    border: none;
+    background-color: rgb(0, 193, 252);
+    color: white;
+    font-weight: 700;
+    padding: 15pt 30pt;
+}
+.botonesJornadas > button:last-child{
+    background-color: red;
+}
+.botonesJornadas{
+    width: 100%;
+}
+select{
+    overflow-y: auto;
+}
+option{
+    margin-top: 5pt;
+}
+option:first-child{
+    margin-top: 0pt;
+}
+.añadirOrganizador{
+    position: fixed;
+    top: 18%;
+    height: 333px;
+    overflow-y: auto;
+    transform: translate(50%, 50%);
+    border: solid, thin;
+    background-color: white;
+}
+.añadirOrganizador > form{
+    display: flex;
+    align-items: center;
+}
+.añadirOrganizador > form > input[type="password"]{
+    margin-top: -15pt;
+}
+.añadirOrganizador > img{
+    position: fixed;
+    top: 5pt;
+    right: 5pt;
+    border-radius: 50%;
+    width: 10%;
+    cursor: pointer;
+}
+.añadirOrganizador > form > input[type="submit"]{
+    background-color: lightgreen;
+}
+.añadirOrganizador > form > input[type="submit"]:disabled{
+    cursor: not-allowed;
+    background-color: lightgray;
+    color: black;
+    border: none;
+}
+.ListaSupervisores > select > option:checked{
+    background-color: rgb(53, 97, 216);
+    color: white;
+}
+.error{color: red;}
+.valid{color: rgb(47, 255, 82)}
+
+.tablaParticipantes{
+    display: none;
+    padding: 20pt;
+    overflow-y: none;
+
+}
+td{
+    padding: 5pt;
+    width: fit-content;
+}
+th{
+    padding: 15pt, 10pt;
+    background-color: blue;
+    color: white;
+}
+table,tr,td{
+    border: solid, thin;
+}
+.tablaParticipantes {
+    display: none;
+    padding: 20pt;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+tr:hover{
+    background-color: #e2e6ea;
+    transition: background 0.3s ease;
+}
+td > input{
+    border: none;
+    background-color: inherit;
+}

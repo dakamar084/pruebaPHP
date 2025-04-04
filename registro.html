@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación Formulario</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <div class="container">
+        <div class="top">
+            <p class="actual" id="datosTop">Datos Personales</p>
+            <hr>
+            <p class="nope" id="direccionTop">Dirección</p>
+            <hr>
+            <p class="nope" id="otrosTop">Otros Datos</p>
+        </div>
+
+        <!-- Formulario Datos Personales -->
+        <div class="login" id="datosPersonales">
+            <form action="">
+                <input type="text" name="nombre" autocomplete="username" placeholder="Nombre Completo" pattern="(\w+\s){2,}\w+"
+                    title="Debe contener al menos tres palabras (dos espacios)" required>
+                <input type="password" name="password" autocomplete="current-password" id="password" placeholder="Contraseña" required>
+                <p id="mensaje"></p>
+                <input type="email" name="correo" placeholder="Correo Electrónico" autocomplete="off" required>
+                <p id="mensajeCorreo" style="color: red;"></p>
+                <input type="text" id="telefono" maxlength="9" name="telefono" placeholder="Teléfono" 
+                pattern="^[679]\d{8}$" title="Debe tener 9 dígitos y empezar con 6, 7 o 9" required>
+                <label for="fecha">Fecha de nacimiento</label>
+                <input type="date" name="fecha_nacimiento" id="fecha" required>
+                <input type="submit" value="Siguiente" id="botonRegistro" disabled>
+            </form>
+        </div>
+
+        <!-- Formulario Dirección -->
+        <div class="login" id="direccion" style="display: none;">
+            <form action="">
+                <input type="text" name="direccion" placeholder="Dirección" required>
+                <input type="text" name="cp" maxlength="5" placeholder="Código Postal" required>
+                <input type="text" name="provincia" placeholder="Provincia" required>
+                <input type="text" name="pais" placeholder="País" value="España" required>
+                <input type="submit" value="Siguiente">
+            </form>
+        </div>
+        <div class="login" id="otrosDatos">
+            <form action="">
+                <input type="file" name="imagen" accept="image/png,image/jpg">
+                <input type="text" name="licencia" placeholder="Nº de licencia">
+                <input type="text" name="federativa" placeholder="Nº de federativa">
+                <input type="checkbox" name="permisos[]" value="notificaciones" id="notis"><label for="notis">Doy permiso para que se me envien notificaciones sobre mi categoria</label>
+                <input type="checkbox" name="permisos[]" value="interes" id="interes"><label for="interes">doy permiso a que se me envie informacion de interes</label>
+                <input type="submit" value="enviar">
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="./firebase.js"></script>
+    <script src="app.js" type="module"></script>
+</body>
+</html>

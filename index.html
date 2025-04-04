@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="estilos.css">
+    <style>
+        input[type="checkbox"] {
+            margin-left: -130pt;
+        }
+
+        label {
+            margin-left: -120pt;
+        }
+
+        .login {
+            border-radius: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login">
+        <h1>login</h1>
+        <form id="login">
+            <input type="email" name="correo" id="correoLogin" placeholder="Correo" autocomplete="username" required><br>
+            <input type="password" name="contra" id="contraseñaLogin" placeholder="contraseña" autocomplete="current-password" required><br>
+            <div style="display: grid; grid-template-columns: repeat(2,auto);">
+                <input type="checkbox" name="verContra" id="ver">
+                <label for="ver">ver contraseña</label>
+            </div>
+            <p id="mensaje" style="color: red;"></p>
+            <a href="registro.html">¿no tienes cuenta? registrate aqui</a><br>
+            <input type="submit" value="Acceder"><br>
+        </form>
+    </div>
+<script type="module">
+    import { messaging,getToken } from "./firebase.js";
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("firebase-messaging-sw.js")
+                .then((registration) => {
+                    console.log("Service Worker registrado con éxito:", registration);
+                })
+                .catch((err) => {
+                    console.log("Error al registrar el Service Worker:", err);
+                });
+        }
+
+        document.addEventListener("DOMContentLoaded", function (e2) {
+            document.getElementById("login").addEventListener("submit", function (e) {
+                e.preventDefault();
+                var respuesta;
+                var correo = document.getElementById("correoLogin");
+                var contra = document.getElementById("contraseñaLogin")
+                fetch("login.php", {
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    method: "POST",
+                    body: `
+                {
+                    "correo":"${correo.value}",
+                    "contra":"${contra.value}"
+                }
+                `
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.existe) {
+                            window.location.replace(data.vista)
+                        }
+                        else {
+                            document.getElementById("mensaje").innerHTML = data.mensaje
+                        }
+                    })
+            })
+            document.getElementById("ver").addEventListener("input", function (e) {
+                var contra = document.getElementById("contraseñaLogin");
+                contra.type = this.checked ? "text" : "password"
+            })
+        })
+    </script>
+</body>
+
+</html>
