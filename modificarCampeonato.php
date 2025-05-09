@@ -3,18 +3,20 @@ require 'conexion.php';
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Recoger datos del formulario
-    $id_camp = (int)($_POST["id_camp"] ?? 0);
+    $id_camp = (int) ($_POST["id_camp"] ?? 0);
     $nombre = $_POST["nombre"] ?? null;
     $localizacion = $_POST["localizacion"] ?? null;
     $enlace = $_POST["enlace"] ?? null;
     $categoria = $_POST["categoria"] ?? null;
     $fechaInicio = $_POST["fechaInicio"] ?? null;
+    $fechaSplit = explode("-", $fechaInicio);
     $libre = isset($_POST["libre"]) ? 1 : 0;
-    $tallaMinima = (int)($_POST["tallaMinima"] ?? 0);
+    $tallaMinima = (int) ($_POST["tallaMinima"] ?? 0);
     $participacion = $_POST["participacion"] ?? null;
     $supervisor = $_POST["supervisor"] ?? null;
-    $jornadas = (int)($_POST["numJornadas"] ?? 0);
-
+    $jornadas = (int) ($_POST["numJornadas"] ?? 0);
+    $fechaSplit[2] += $jornadas;
+    $fechaFin = implode("-", $fechaSplit);
     // Validar datos requeridos
     if (!$id_camp || !$nombre || !$localizacion || !$categoria || !$fechaInicio || !$supervisor || !$participacion || $jornadas < 0) {
         echo "Error: Faltan datos obligatorios o son inválidos.";
@@ -26,13 +28,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     try {
         // Actualizar el campeonato
-        $stm_camp = $cone->prepare("UPDATE campeonatos SET supervisor = ?, nombre = ?, localizacion = ?, enlaceMapa = ?, categoria = ?, open = ?, fechaInicio = ?, tallaMinima = ?, participacion = ? WHERE id_campeonato = ?");
-        $stm_camp->bind_param("sssssisisi", $supervisor, $nombre, $localizacion, $enlace, $categoria, $libre, $fechaInicio, $tallaMinima, $participacion, $id_camp);
+        $stm_camp = $cone->prepare("UPDATE campeonatos SET supervisor = ?, nombre = ?, localizacion = ?, enlaceMapa = ?, categoria = ?, open = ?, fechaInicio = ?, tallaMinima = ?, participacion = ?, fechaFin = ? WHERE id_campeonato = ?");
+        $stm_camp->bind_param("sssssisissi", $supervisor, $nombre, $localizacion, $enlace, $categoria, $libre, $fechaInicio, $tallaMinima, $participacion, $fechaFin, $id_camp);
         $stm_camp->execute();
 
         // Obtener el número actual de jornadas
         $current_jornadas = $cone->query("SELECT COUNT(*) FROM jornadas WHERE id_campeonato = $id_camp")->fetch_row()[0];
-        
+
         if ($jornadas > $current_jornadas) {
             // Añadir jornadas faltantes
             $to_add = $jornadas - $current_jornadas;
@@ -74,17 +76,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 throw new Exception("Error al eliminar jornadas sobrantes: " . $stm_delete->error);
             }
         }
-        
+
         // Verificar y ajustar mangas y turnos para las jornadas existentes
         if ($jornadas > 0) {
             // Obtener todas las jornadas existentes
             $result = $cone->query("SELECT id_jornada FROM jornadas WHERE id_campeonato = $id_camp");
             while ($row = $result->fetch_assoc()) {
                 $id_jornada = $row['id_jornada'];
-                
+
                 // Verificar mangas para esta jornada
                 $manga_count = $cone->query("SELECT COUNT(*) FROM mangas WHERE id_jornada = $id_jornada")->fetch_row()[0];
-                
+
                 if ($manga_count < 2) {
                     // Añadir mangas faltantes
                     for ($j = $manga_count; $j < 2; $j++) {
@@ -94,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                             throw new Exception("Error al añadir manga: " . $stm_manga->error);
                         }
                         $id_manga = $cone->insert_id;
-                        
+
                         // Añadir 2 turnos por manga
                         for ($k = 0; $k < 2; $k++) {
                             $stm_turno = $cone->prepare("INSERT INTO turnos (id_manga, numero_turno) VALUES (?, ?)");
@@ -114,13 +116,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         throw new Exception("Error al eliminar mangas sobrantes: " . $stm_delete->error);
                     }
                 }
-                
+
                 // Verificar turnos para cada manga (2 por manga)
                 $mangas = $cone->query("SELECT id_manga FROM mangas WHERE id_jornada = $id_jornada");
                 while ($manga = $mangas->fetch_assoc()) {
                     $id_manga = $manga['id_manga'];
                     $turno_count = $cone->query("SELECT COUNT(*) FROM turnos WHERE id_manga = $id_manga")->fetch_row()[0];
-                    
+
                     if ($turno_count < 2) {
                         // Añadir turnos faltantes
                         for ($k = $turno_count; $k < 2; $k++) {
@@ -152,4 +154,4 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $cone->rollback();
         echo "Error: " . $e->getMessage();
     }
-}
+}       

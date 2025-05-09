@@ -4,7 +4,7 @@ require 'conexion.php';
 
 $hoy = date("Y-m-d");
 
-$stm = $cone -> prepare("SELECT id_campeonato, nombre from campeonatos where fechaInicio >= ?");
+$stm = $cone -> prepare("SELECT id_campeonato, nombre from campeonatos where fechaFin >= ?");
 $stm -> bind_param("s", $hoy);
 
 $stm -> execute();

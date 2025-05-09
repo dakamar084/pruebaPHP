@@ -4,8 +4,10 @@
     gap: 30pt;
     padding: 20pt;
 }
-
-#main > button {
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+#main>button {
     margin-left: 20%;
     min-width: 200px;
     border: none;
@@ -20,7 +22,7 @@
     cursor: pointer;
 }
 
-#modal {   
+#modal {
     position: fixed;
     top: 0pt;
     right: 46%;
@@ -35,23 +37,25 @@
     display: flex;
     flex-direction: column;
     gap: 15pt;
-    display: none; /* Mantenemos el display:none inicial */
+    z-index: 999;
+    display: none;
+    /* Mantenemos el display:none inicial */
 }
 
-#modal > h3 {
+#modal>h3 {
     margin: 0;
 }
 
-#modal > select {
+#modal>select {
     width: 100%;
     padding: 15pt;
 }
 
-#modal > select:focus {
+#modal>select:focus {
     outline: none;
 }
 
-#modal > img {
+#modal>img {
     width: 5%;
     position: fixed;
     min-width: 30px;
@@ -60,7 +64,7 @@
     right: 10pt;
 }
 
-#modal > button:disabled {
+#modal>button:disabled {
     cursor: not-allowed;
     margin-top: 10pt;
     padding: 15pt;
@@ -68,10 +72,10 @@
     color: black;
     border: none;
     font-size: 15pt;
-    border-radius:15pt;
+    border-radius: 15pt;
 }
 
-#modal > button:enabled {
+#modal>button:enabled {
     cursor: pointer;
     margin-top: 10pt;
     padding: 15pt;
@@ -79,7 +83,8 @@
     color: white;
     border: none;
     font-size: 15pt;
-    border-radius:15pt;
+    border-radius: 15pt;
+    text-shadow: 1px -4px 4px black;
 }
 
 .participante {
@@ -88,7 +93,7 @@
     padding: 10pt;
 }
 
-.participante > img {
+.participante>img {
     width: 50%;
     background-color: red;
     border-radius: 50%;
@@ -100,11 +105,13 @@
     max-height: 130pt;
     overflow-y: auto;
 }
-.accion > p{
+
+.accion>p {
     color: red;
     margin-top: 5pt;
 }
-.accion > button{
+
+.accion>button {
     padding: 12pt 30pt;
     font-size: 14pt;
     background-color: lightgreen;
@@ -116,12 +123,153 @@
     border-radius: 15pt;
     cursor: pointer;
 }
-.participantes hr:last-child{
+
+.participantes hr:last-child {
     display: none;
 }
-.accion > button:disabled{
+
+.accion>button:disabled {
     background-color: lightgray;
     color: black;
     cursor: not-allowed;
     text-shadow: none;
+}
+
+.perfil {
+    width: 5%;
+    padding: 0.5%;
+    position: fixed;
+    cursor: pointer;
+    top: 2%;
+    right: 9%;
+    margin-right: 15pt;
+}
+
+.perfil img {
+    width: 80%;
+    border-radius: 50%;
+    border: solid, black;
+    padding: 8pt;
+    background-color: whitesmoke;
+}
+
+.botones {
+    display: none;
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    border-radius: 15pt;
+    padding: 15pt 57pt;
+    width: 120%;
+}
+
+.botones>button {
+    cursor: pointer;
+    position: relative;
+    height: 39pt;
+    margin-top: 10pt;
+    background-color: lightblue;
+    border: none;
+    border-radius: 10pt;
+    margin-left: -36pt;
+}
+
+.modalDatos {
+    position: fixed;
+    top: -3%;
+    display: none;
+    left: 20%;
+    padding: 30pt 15pt;
+    border: solid, black, thin;
+    background-color: white;
+    width: 30%;
+    transform: translate(50%, 50%);
+    height: fit-content;
+}
+
+.modalDatos>img {
+    position: fixed;
+    cursor: pointer;
+    top: 2%;
+    right: 4%;
+    width: 5%;
+    min-height: 25px;
+    min-width: 25px;
+}
+
+.modalDatos input {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding: 10pt 5pt;
+    margin-top: 10pt;
+}
+
+.modalDatos input:focus {
+    outline: none;
+}
+
+.modalDatos select {
+    padding: 15pt 30pt;
+    width: 80%;
+    align-self: center;
+    height: fit-content;
+    text-align: center;
+}
+
+select:focus {
+    outline: none;
+}
+
+input[type="date"] {
+    padding: inherit;
+}
+
+label {
+    margin-top: 24pt;
+    margin-bottom: -7pt;
+}
+
+.modalDatos form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modalDatos input[type="submit"] {
+    border-bottom: none;
+    background-color: #05a3ff;
+    border-radius: 10pt;
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.mover {
+    display: inline-block;
+    padding: 12pt 5pt;
+    width: 80%;
+    margin-top: -29pt;
+    position: fixed;
+    cursor: pointer;
+}
+
+@media(min-width:430px) {
+    .botones>button {
+        display: flex;
+        flex-direction: column;
+        /* margin-left: 10%; */
+        width: 75%;
+        padding-top: 12pt;
+        min-width: 145px;
+    }
+
+    .botones {
+        display: flex;
+        flex-direction: column;
+        background-color: aliceblue;
+        border-radius: 15pt;
+        padding: 10pt 57pt;
+        width: 120%;
+        margin-left: -74pt;
+    }
 }

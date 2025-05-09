@@ -1,101 +1,153 @@
-#yeah{
+#yeah {
     background-color: gray;
     font-weight: bolder;
 }
-#nope{
+
+#nope {
     background-color: lightgray;
 }
-body{
+
+body {
     display: grid;
     grid-template-columns: 30% auto;
 }
-.lateral{
+
+.lateral {
     display: block;
     background-color: lightgray;
     display: flex;
     padding: 0%;
-    height: 120vh;
+    min-height: 120vh;
+    height: 100%;
     flex-direction: column;
     transition: display 1s;
 }
-.lateral > button{
+
+.lateral>button {
     width: 100%;
     border-left: none;
     border-right: none;
     border-top: none;
     border-bottom-width: thin;
-    height: 10%;
+    height: 120px;
 }
-.lateral > button:first-child{
+
+.lateral>button:first-child {
     margin-top: 30%;
     border-top: solid;
     border-top-width: thin;
 }
-.datosPersonales, form, select{
+
+.datosPersonales,
+form,
+select {
     display: flex;
     flex-direction: column;
-    margin-left: 10%;   
-    width: 60%;
+    margin-left: 10%;
+    width: 75%;
+    min-width: 261px;
 }
-select{
+
+
+@media(max-width: 430px) {
+
+    .datosPersonales,
+    form,
+    select {
+        display: flex;
+        flex-direction: column;
+        margin-left: 4%;
+        width: 60%;
+        min-width: 261px;
+    }
+}
+
+select {
     padding: 16px 0;
     margin-bottom: 10%;
     outline: none;
 }
-.datosPersonales > form > input{
+
+.datosPersonales>form>input {
     margin: 10pt;
     padding: 5pt;
-    border-right: none;
     border-left: none;
     border-top: none;
+    border-right: none;
 }
-.datosPersonales > form > input:focus{
+
+.datosPersonales>form>input:focus {
     outline: none;
 }
-label{
+
+label {
     margin-top: 10pt;
 }
-input[type="submit"]:disabled{
+
+input[type="submit"]:disabled {
     padding: 10pt;
     background-color: rgb(194, 194, 194);
     color: black;
+    border-radius: 10pt;
     font-weight: 700;
-    border-bottom: none;
+    border: none;
+    cursor: not-allowed;
 
 }
-input[type="submit"]:enabled{
+
+input[type="submit"]:enabled {
     padding: 10pt;
     background-color: rgb(0, 195, 255);
     color: white;
     font-weight: 700;
-    border-bottom: none;
+    border-radius: 10pt;
+    border: none;
 
 }
 
-.valid{color: rgb(2, 192, 2)}
-.error{color: red;}
-.oculto{
+.valid {
+    color: rgb(2, 192, 2)
+}
+
+.error {
+    color: red;
+}
+
+.oculto {
     display: none;
 }
-.visible{
+
+.visible {
     display: block;
 }
-button:hover, input[type="submit"], select, select > option{
+
+button:hover,
+input[type="submit"],
+select,
+select>option {
     cursor: pointer;
 }
-.campeonatoHistorial{
+
+.campeonatoHistorial {
     list-style: none;
     padding-top: 15pt;
     padding-bottom: 10pt;
     padding-left: 10pt;
     padding-right: 40pt;
-    border: solid,black;
-    border-width: thin;
     display: grid;
     grid-template-columns: 95% auto;
+    border: none;
+    border-bottom: solid grey thin;
 }
-
-.campeonatoHistorial > .girar{
+.campeonatoHistorial:first-of-type {
+    border-top: solid gray;
+    border-width: thin;
+    
+}
+.campeonatoHistorial:nth-of-type(even){
+    background-color: rgb(235 235 235);
+}
+.campeonatoHistorial>.girar {
     border: solid, black;
     border-width: thin;
     border-radius: 50%;
@@ -106,56 +158,495 @@ button:hover, input[type="submit"], select, select > option{
     transition: transform 0.2s;
     padding: 1%;
 }
-.campeonatoHistorial > .girar:hover{
+
+.campeonatoHistorial>.girar:hover {
     cursor: pointer;
 }
-.datos:hover{
+.sub p {
+    font-style: italic;
+}
+
+
+.datos:hover {
     cursor: default;
 }
-.campeonatoHistorial:hover{
+
+.campeonatoHistorial:hover {
     cursor: pointer;
 }
-.campeonatoHistorial > p{
+
+.campeonatoHistorial>p {
     white-space: nowrap;
-    padding-top:5pt ;
+    padding-top: 5pt;
 }
-.campeonatoHistorial2 > .campeonato{
+
+.campeonatoHistorial2>.campeonato {
     padding-top: 21pt;
 }
-.campeonatoHistorial2{
+
+.campeonatoHistorial2 {
     list-style: none;
     padding-top: 15pt;
     padding-bottom: 10pt;
     padding-left: 10pt;
     padding-right: 40pt;
-    border: solid,black;
+    border: solid, black;
     border-width: thin;
     display: grid;
-    grid-template-columns:60% 40%;
+    grid-template-columns: 60% 40%;
 }
-.sub{
+
+.sub {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.sub > button{
+.sub>button {
     padding: 15pt;
 }
-@media(min-width:678px){
-    .campeonatoHistorial2{
+
+@media(min-width:678px) {
+    .campeonatoHistorial2 {
         white-space: nowrap;
     }
 }
-.cancelar{
+
+.cancelar {
     background-color: red;
     color: white;
     font-size: 14pt;
     border: none;
 }
-.apuntar{
+
+.apuntar {
     background-color: blue;
     color: white;
     font-size: 14pt;
     border: none;
+}
+
+.activo {
+    color: rgb(0, 228, 0);
+    white-space: nowrap;
+    display: inline-block;
+    display: flex;
+    flex-direction: column;
+}
+
+.activo>.circulo {
+    background-color: rgb(0, 228, 0);
+    border-radius: 50%;
+    padding: 4pt;
+    width: 3px;
+    height: 3px;
+}
+
+.inactivo {
+    color: red;
+    display: flex;
+    flex-direction: column;
+}
+
+.inactivo>.circulo {
+    background-color: red;
+    border-radius: 50%;
+    padding: 4pt;
+    width: 3px;
+    height: 3px;
+
+}
+
+.nombreCamp,
+.activo,
+.inactivo {
+    display: flex;
+    flex-direction: row;
+    white-space: nowrap;
+    gap: 5pt;
+}
+
+.resultados {
+    display: flex;
+    flex-direction: column;
+}
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.lista-turnos {
+    list-style-type: decimal;
+    padding-left: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.turno-item {
+    margin: 20px 0;
+    padding: 15px;
+    border: 2px solid #4a90e2;
+    border-radius: 10px;
+    background-color: #f0f8ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.turno-actual {
+    margin: 20px 0;
+    cursor: pointer;
+    padding: 15px;
+    border: 2px solid green;
+    border-radius: 10px;
+    background-color: #d5f8d2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    position: sticky;
+    top: 2%;
+    bottom: 2%;
+    z-index: 998;
+}
+
+
+.turno-item:hover,
+.turno-actual:hover {
+    transform: scale(1.01);
+}
+
+.turno-detalles {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.turno-detalles li {
+    margin: 8px 0;
+    font-size: 16px;
+}
+
+.lista-turnos {
+    list-style: none;
+}
+
+.modalAñadirPieza {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    align-items: start;
+    top: 15%;
+    /* right: 30%; */
+    left: 30%;
+    z-index: 999;
+    padding: 10pt 50pt 30pt 0pt;
+    transform: scale(100%, 100%);
+    border: solid black thin;
+    background-color: white;
+    width: 50%;
+    max-width: 400px;
+}
+
+.modalAñadirPieza>h1 {
+    padding-left: 30%;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.modalAñadirPieza>img {
+    position: fixed;
+    top: 3pt;
+    cursor: pointer;
+    right: 5pt;
+    width: 8%;
+}
+
+.modalAñadirPieza input {
+    margin: 10pt;
+    border-top: none;
+    padding: 5pt 10pt;
+    border-left: none;
+    border-right: none;
+}
+
+.modalAñadirPieza form {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10%;
+    width: 100%;
+}
+
+.modalAñadirPieza input:focus {
+    outline: none;
+}
+
+.modalAñadirPieza input[type="submit"]:disabled {
+    background-color: lightgray;
+    color: black;
+    font-weight: 700;
+    cursor: not-allowed;
+}
+
+.equipo {
+    display: none;
+    padding: 15pt 30pt;
+    margin-top: -60pt;
+}
+
+.participantes {
+    display: flex;
+    flex-direction: column;
+    border: solid black thin;
+    padding: 0pt 30pt;
+    max-height: 200px;
+    overflow: auto;
+    margin-bottom: 15pt;
+}
+
+.participante {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    background-color: aliceblue;
+    margin-bottom: 10pt;
+    border: solid gray thin;
+    padding: 6pt 12pt;
+    min-width: 400px;
+}
+
+.participante>img {
+    width: 45%;
+    background-color: red;
+    border-radius: 50%;
+    min-width: 40px;
+    margin-top: 3pt;
+    cursor: pointer;
+    max-width: 60px;
+}
+
+.enlace {
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
+}
+
+.participante:first-child {
+    margin-top: 15pt;
+}
+
+.equipo button {
+    padding: 0pt 30pt;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 15pt;
+    height: 50px;
+}
+
+.equipo button:disabled {
+    padding: 0pt 30pt;
+    background-color: lightgray;
+    color: black;
+    border: none;
+    border-radius: 15pt;
+    height: 50px;
+    cursor: not-allowed;
+}
+
+.invitar {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    margin-left: -11%;
+    gap: 5%;
+}
+
+@media(max-width:431px) {
+    .invitar {
+        display: flex;
+        flex-direction: row;
+        align-items: start;
+        margin-left: -4%;
+        gap: 5%;
+    }
+
+    .equipo>p {
+        margin-top: 36% !important;
+        margin-left: -24pt;
+    }
+
+    .solicitudes {
+        top: 75pt !important;
+        right: -341pt !important;
+    }
+
+    .participantes {
+        display: flex;
+        flex-direction: column;
+        border: solid black thin;
+        padding: 2pt 33pt;
+        max-height: 200px;
+        overflow: auto;
+        margin-bottom: 15pt;
+        margin-left: -20pt;
+    }
+
+    .participante {
+        display: grid;
+        grid-template-columns: 80% 20%;
+        background-color: aliceblue;
+        margin-bottom: 10pt;
+        border: solid gray thin;
+        padding: 6pt 14pt;
+        min-width: 174px;
+        margin-left: -25pt;
+        width: 116%;
+    }
+
+    .abandonarEquipo {
+        background-color: red !important;
+        margin-top: 45pt !important;
+        margin-left: 15pt;
+
+    }
+
+    .cantidad {
+        border-radius: 50%;
+        background-color: red;
+        width: 12px;
+        height: 16px;
+        color: white;
+        position: fixed;
+        top: -12pt;
+        padding: 2px 4px 3px 7px;
+        left: 98pt !important;
+    }
+
+    .solicitudes>img {
+        width: 10%;
+        cursor: pointer;
+        margin-left: 100pt !important;
+    }
+    span {
+        margin-right: 50pt;
+    }
+    .oferta {
+        display: flex;
+        flex-direction: row;
+        gap: 12pt;
+        margin-top: 10pt;
+        background: rgb(136, 252, 236);
+        padding: 15pt 10pt;
+        border-radius: 15pt;
+        color: white;
+        text-shadow: 1px 1px 3px black;
+        margin-right: 215pt !important;
+    }
+    .crearEquipo {
+        left: 5% !important;
+    }
+}
+
+.solicitudes {
+    position: fixed;
+    top: 66pt;
+    right: -194pt;
+    float: left;
+    transform: scale(100%, 100%);
+}
+
+.equipo>p {
+    margin-top: -20pt;
+}
+
+.cantidad {
+    border-radius: 50%;
+    background-color: red;
+    width: 12px;
+    height: 16px;
+    color: white;
+    position: fixed;
+    top: -14pt;
+    padding: 2px 4px 3px 7px;
+    left: -6pt;
+}
+
+.solicitudes>img {
+    width: 10%;
+    cursor: pointer;
+}
+
+.ofertas {
+    display: none;
+    margin-left: -25%;
+}
+
+.oferta {
+    display: flex;
+    flex-direction: row;
+    gap: 12pt;
+    margin-top: 10pt;
+    background: rgb(136, 252, 236);
+    padding: 15pt 10pt;
+    border-radius: 15pt;
+    color: white;
+    text-shadow: 1px 1px 3px black;
+}
+
+.aceptar {
+    background-color: rgb(0, 228, 0) !important;
+}
+
+.rechazar {
+    background-color: red !important;
+}
+
+.abandonarEquipo {
+    background-color: red !important;
+    margin-top: 15pt;
+    margin-left: 15pt;
+
+}
+.lista {
+    display: flex;
+    flex-direction: row;
+}
+.crearEquipo{
+    display: none;
+    position: fixed;
+    background-color: white;
+    border: solid black thin;
+    top: 25%;
+    transform: scale(1);
+    left: 50%;
+    padding: 35pt 50pt;
+}
+.crearEquipo > form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.crearEquipo > form >*{
+    width: 100%;
+    margin-left: 0pt;
+    padding: 10pt 0pt;
+    margin-bottom: 10pt;
+}
+.crearEquipo form input[type="text"]{
+    border: none;
+    border-bottom: solid black thin !important;
+    padding: 10pt 5pt;
+}
+.crearEquipo input:focus{
+    outline: none;
+}
+.crearEquipo > form > *:last-child{
+    margin-bottom: 0pt;
+}
+.crearEquipo > img{
+    position: fixed;
+    top: 1pt;
+    right: 3pt;
+    width: 7%;
+    cursor: pointer;
+}
+.mensaje{
+    color: red; 
+    text-align: center;
+    padding: 0pt 0pt !important;
+    margin-top: 0pt;
 }

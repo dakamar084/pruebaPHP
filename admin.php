@@ -4,7 +4,7 @@ session_start();
 require 'conexion.php';
 
 
-if(!isset($_SESSION['correo'])){
+if (!isset($_SESSION['correo'])) {
     header('Location:index.html');
 }
 
@@ -29,6 +29,8 @@ if ($rol !== "admin") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="manifest" href="manifest.json">
     <title>vista de admin</title>
     <link rel="stylesheet" href="admin.css">
 </head>
@@ -39,6 +41,7 @@ if ($rol !== "admin") {
         <select id="campeonatos" size="1">
         </select>
         <button id="tablaParticipantes">Ver participantes</button>
+        <button id="cerrarSes">Cerrar sesion</button>
     </div>
     <div class="otraParte">
         <form action="">
@@ -73,14 +76,14 @@ if ($rol !== "admin") {
                 <label for="fecha">fecha de comienzo del campeonato</label>
                 <input type="date" name="fechaInicio" required placeholder="" name="" id="fecha">
             </div>
-            <input type="number" required placeholder="talla minima" name="tallaMinima" id="" min="0">
+            <input type="number" required placeholder="talla minima" name="tallaMinima" min="0">
             <input type="submit" id="botonFormu" value="Añadir">
         </form>
         <div class="derecha">
-            <select name="jornadas" id="jornadas" size="4">
-                <option value="jornada1">jornada 1</option>
-                <option value="jornada2">jornada 2</option>
-            </select>
+            <ul id="jornadas">
+                <li>jornada 1</li>
+                <li>jornada 2</li>
+            </ul>
             <div class="ListaSupervisores">
                 <select name="supervisor" id="supervisor" size="4">
                 </select>
@@ -101,9 +104,28 @@ if ($rol !== "admin") {
         </div>
     </div>
     <div class="tablaParticipantes">
-        
+
+    </div>
+    <div class="modalContraseña">
+        <img src="cerrar.png" alt="cerrar modal">
+        <h2>Modificar contraseña de: <span class="correoModificar">pepelin@correo</span></h2>
+        <form action="">
+            <input type="text" hidden autocomplete="off" name="usuario">
+            <input type="password" name="contraseña" autocomplete="new-password" class="contra" id="contra1"
+                placeholder="introduce la nueva contraseña">
+            <input type="password" name="contraRepetida" autocomplete="new-password" class="contra" id="contra2"
+                placeholder="Introduce de nuevo la contraseña">
+            <p id="mensajesContra2">
+
+            </p>
+            <div>
+                <input type="checkbox" name="verContras" id="ver"><label for="ver">Ver contraseñas</label>
+            </div>
+            <input type="submit" value="Cambiar Contraseña" id="modContraseña">
+        </form>
     </div>
     <script src="admin.js">
     </script>
 </body>
+
 </html>

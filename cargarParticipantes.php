@@ -24,6 +24,7 @@ echo'
     <th>permisos de datos de interes</th>
     <th>permisos de notificaciones</th>
     <th>rol</th>
+    <th>acciones</th>
 ';
 
 while( $row = $res -> fetch_assoc() ){
@@ -46,7 +47,7 @@ while( $row = $res -> fetch_assoc() ){
     <td><input type="text" name="interes" value="'.$interes.'"/></td>
     <td><input type="text" name="notificaciones" value="'.$notis.'"/></td>
     <td><input type="text" name="rol" value="'.$row["rol"].'"/></td>
+    <td class="acciones"><img title="eliminar participante" data-action="eliminar" src="eliminar.png"><img src="editar.png" data-action="modificar" title="modificar contraseña"></img>
 </tr>';
-
 }
 echo '</table>';

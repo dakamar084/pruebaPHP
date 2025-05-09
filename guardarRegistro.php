@@ -4,6 +4,8 @@ require 'conexion.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Recibir datos del formulario
+    session_start();
+
 
     $nombre = explode(" ", $_POST["nombre"])[0] ?? '';
     $apellidos = explode(" ", $_POST["nombre"])[1] .' '. explode(" ", $_POST["nombre"])[2] ?? '';
@@ -39,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     
     // Insertar datos en la base de datos
-    $stmt = $cone->prepare("INSERT INTO participantes (nombre, apellidos, correo, provincia, telefono, direccion, CP, fechaNac, rutaImagen, pais, contraseña, numLicencia, numFede, interes, notificaciones, endpoint) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $cone->prepare("INSERT INTO participantes (nombre, apellidos, correo, provincia, telefono, direccion, CP, fechaNac, rutaImagen, pais, contraseña, numLicencia, numFede, interes, notificaciones,verificado, endpoint) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,0, ?)");
     $stmt->bind_param("sssssssssssssiis", $nombre, $apellidos, $correo,$provincia, $telefono, $direccion, $cp, $fechaNac, $imagenPath, $pais, $contra, $numLicencia, $numFede, $interes, $notis, $endpoint);
     
     if ($stmt->execute()) {
@@ -47,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         echo "Error en el registro: " . $stmt->error;
     }
-
+    $_SESSION["correo"] = $correo;
     $stmt->close();
     $cone->close();
 } else {

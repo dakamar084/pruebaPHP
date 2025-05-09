@@ -1,0 +1,148 @@
+.correoEnviado {
+    display: none;
+}
+.correoEnviado form{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+.cambiarContraseña {
+    display: none;
+}
+.correoEnviado input[type="text"] {
+    outline: none;
+    padding: 10pt 15pt;
+    border-radius: 10pt;
+    text-align: center;
+    border: black solid thin;
+    width: 10px;
+    margin: 3pt;
+}
+body {
+    background-color: aliceblue;
+    padding: 20pt 40pt;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body div {
+    display: flex;
+    background-color: white;
+    padding: 15pt 30pt;
+    border-radius: 15pt;
+    align-items: center;
+    flex-direction: column;
+}
+
+div input {
+    outline: none;
+    padding: 10pt 15pt;
+    border-radius: 10pt;
+    border: black solid thin;
+}
+
+div input[type="submit"]:disabled {
+    border: none !important;
+    cursor: not-allowed;
+    background-color: lightskyblue;
+    color: white;
+}
+
+
+div input[type="submit"]:enabled {
+    border: none !important;
+    cursor: pointer;
+    background-color: rgb(22, 164, 253);
+    color: white;
+}
+
+.errores {
+    color: red;
+}
+
+img {
+    width: 10%;
+    border-radius: 50%;
+    filter: invert(1);
+    background-color: #23CABA;
+}
+.codigoIncorrecto {
+    display: none;
+    background-color: #dc3545 ;
+    border: 1px solid #f5c2c7;
+    border-radius: 10px;
+    padding: 20px;
+    align-items: center;
+    gap: 15px;
+    height: 116px;
+}
+.codigoIncorrecto div{
+    display: flex;
+    flex-direction: row;
+    color: white;
+    height: 70%;
+    background-color: lightcoral;
+}
+.mensajeError{
+    display: flex;
+    flex-direction: column !important;
+}
+.mensajeError > *{
+    margin-top: inherit;
+}
+@media(min-width:430px){
+    .correoEnviado input[type="text"] {
+        outline: none;
+        padding: 10pt 10pt;
+        border-radius: 10pt;
+        text-align: center;
+        border: black solid thin;
+        width: 20px;
+        margin: 3pt;
+    }
+    .correoEnviado form {
+        display: block;
+        align-items: center;
+        gap: 10px;
+        margin: -10pt;
+    }
+    .codigoIncorrecto {
+        /* display: none; */
+        background-color: #dc3545;
+        border: 1px solid #f5c2c7;
+        border-radius: 10px;
+        padding: 20px;
+        align-items: center;
+        gap: 15px;
+        height: fit-content;
+        width: fit-content;
+    }
+}
+@media(max-width:430px){
+    .correoEnviado input[type="text"] {
+        outline: none;
+        padding: 10pt 10pt;
+        border-radius: 10pt;
+        text-align: center;
+        border: black solid thin;
+        width: 20px;
+        margin: 3pt;
+    }
+    .correoEnviado form {
+        display: block;
+        align-items: center;
+        gap: 10px;
+        margin: -10pt;
+    }
+    .codigoIncorrecto {
+        /* display: none; */
+        background-color: #dc3545;
+        border: 1px solid #f5c2c7;
+        border-radius: 10px;
+        padding: 20px;
+        align-items: center;
+        gap: 15px;
+        height: fit-content;
+        width: fit-content;
+    }
+}

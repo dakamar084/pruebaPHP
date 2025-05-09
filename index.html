@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>Login</title>
+    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="estilos.css">
     <style>
         input[type="checkbox"] {
@@ -34,12 +36,14 @@
             <p id="mensaje" style="color: red;"></p>
             <a href="registro.html">¿no tienes cuenta? registrate aqui</a><br>
             <input type="submit" value="Acceder"><br>
+            <a href="contraseñaOlvidada.php"><button id="ContraOlvidada">¿Olvidaste tu contraseña?</button></a>
         </form>
     </div>
 <script type="module">
+    
     import { messaging,getToken } from "./firebase.js";
         if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register("firebase-messaging-sw.js")
+            navigator.serviceWorker.register("./firebase-messaging-sw.js")
                 .then((registration) => {
                     console.log("Service Worker registrado con éxito:", registration);
                 })
@@ -54,6 +58,7 @@
                 var respuesta;
                 var correo = document.getElementById("correoLogin");
                 var contra = document.getElementById("contraseñaLogin")
+
                 fetch("login.php", {
                     headers: {
                         "Content-Type": "application/json"
@@ -69,7 +74,9 @@
                     .then(response => response.json())
                     .then(data => {
                         if (data.existe) {
-                            window.location.replace(data.vista)
+                            var a = document.createElement("a")
+                            a.setAttribute("href", data.vista)
+                            a.click()
                         }
                         else {
                             document.getElementById("mensaje").innerHTML = data.mensaje
@@ -80,8 +87,14 @@
                 var contra = document.getElementById("contraseñaLogin");
                 contra.type = this.checked ? "text" : "password"
             })
+            document.querySelector("#ContraOlvidada").addEventListener("click", function(e){
+                e.preventDefault();
+                var correo = document.querySelector("#correoLogin").value;
+                var a = document.createElement("a")
+                a.setAttribute("href", correo != "" ? `contraseñaOlvidada.php?correo=${correo}` : 'contraseñaOlvidada.php')
+                a.click();
+            })
         })
     </script>
 </body>
-
 </html>

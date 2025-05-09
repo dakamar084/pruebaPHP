@@ -14,6 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $participacion = $_POST["participacion"] ?? null;
     $supervisor = $_POST["supervisor"] ?? null;
 
+    $fechaFinDate = new DateTime($fechaInicio);
+    $fechaFinDate -> modify('+ '.$jornadas.' days');
+    $fechaFin = $fechaFinDate -> format("Y-m-d");
     // Validar datos requeridos
     if (!$nombre || !$jornadas || !$localizacion || !$categoria || !$fechaInicio || !$supervisor || !$participacion) {
         echo "Error: Faltan datos obligatorios.";
@@ -25,9 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     try {
         // Insertar el campeonato
-        $stm = $cone->prepare("INSERT INTO campeonatos (supervisor, nombre, localizacion, enlaceMapa, categoria, open, fechaInicio, tallaMinima, participacion) 
-                               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stm->bind_param("sssssisis", $supervisor, $nombre, $localizacion, $enlace, $categoria, $libre, $fechaInicio, $tallaMinima, $participacion);
+        $stm = $cone->prepare("INSERT INTO campeonatos (supervisor, nombre, localizacion, enlaceMapa, categoria, open, fechaInicio, tallaMinima, participacion, fechaFin) 
+                               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)");
+        $stm->bind_param("sssssisiss", $supervisor, $nombre, $localizacion, $enlace, $categoria, $libre, $fechaInicio, $tallaMinima, $participacion, $fechaFin);
         
         if (!$stm->execute()) {
             throw new Exception("Error al añadir el campeonato: " . $stm->error);

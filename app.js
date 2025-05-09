@@ -1,5 +1,5 @@
 
-import {messaging, getToken} from './firebase.js'
+import { messaging, getToken } from './/firebase.js'
 
 var fecha = document.getElementById("fecha");
 var hoy = new Date().toISOString().split("T")[0];
@@ -40,20 +40,24 @@ document.getElementById("password").addEventListener("input", function () {
     validarFormulario();
 });
 
-// Validación del correo con AJAX
+setInterval(() => {
+
+},3000)
+
+
 document.querySelector('input[name="correo"]').addEventListener("input", function () {
     var correo = this.value;
 
     fetch(`comprobarCorreo.php?correo=${correo}`, {
         headers: { "Content-Type": "application/json" }
     })
-    .then(response => response.json())
-    .then(data => {
-        correoValido = !data.existe;
-        document.getElementById("mensajeCorreo").innerHTML = data.mensaje;
-        validarFormulario();
-    })
-    .catch(error => console.error("Error al comprobar el correo:", error));
+        .then(response => response.json())
+        .then(data => {
+            correoValido = !data.existe;
+            document.getElementById("mensajeCorreo").innerHTML = data.mensaje;
+            validarFormulario();
+        })
+        .catch(error => console.error("Error al comprobar el correo:", error));
 });
 
 // Validación del teléfono (solo números)
@@ -80,7 +84,7 @@ var dp = document.getElementById("datosPersonales");
 // Cambio de secciones en el formulario
 document.querySelector("#datosPersonales > form").addEventListener("submit", function (e) {
     e.preventDefault();
-    
+
     document.getElementById("datosTop").className = "nope";
     document.getElementById("direccionTop").className = "actual";
 
@@ -98,18 +102,18 @@ document.querySelector("#direccion > form").addEventListener("submit", function 
     otros.style.display = "block";
 });
 
-// Envío del formulario de otros datos con AJAX
+
 document.querySelector("#otrosDatos > form").addEventListener("submit", async function (event) {
     event.preventDefault();
 
     var formData = new FormData();
-
+    var correo = document.querySelector('input[name="correo"]').value;
     // Datos personales
     formData.append("nombre", document.querySelector('input[name="nombre"]').value);
     formData.append("password", document.querySelector('input[name="password"]').value);
     formData.append("telefono", document.querySelector('input[name="telefono"]').value);
     formData.append("fecha_nacimiento", document.querySelector('input[name="fecha_nacimiento"]').value);
-    formData.append("correo", document.querySelector('input[name="correo"]').value);
+    formData.append("correo", correo);
 
     // Dirección
     formData.append("direccion", document.querySelector('input[name="direccion"]').value);
@@ -127,45 +131,68 @@ document.querySelector("#otrosDatos > form").addEventListener("submit", async fu
     var algunoSeleccionado = false
     permisosSeleccionados.forEach(permiso => {
         formData.append("permisos[]", permiso.checked ? 1 : 0);
-        if(permiso.checked){
+        if (permiso.checked) {
             algunoSeleccionado = true
         }
     });
 
-    var promise = getToken(messaging,{
-        vapidKey:"BOg_i-Wk1kRfqJgifQJIfgdbDOtsRkekD-AaBR2Y9-d-17kQNXNGwyODkVKlAKESVoAKpEfu0GOPbvudR_-y-5U"
+    var promise = getToken(messaging, {
+        vapidKey: "BOg_i-Wk1kRfqJgifQJIfgdbDOtsRkekD-AaBR2Y9-d-17kQNXNGwyODkVKlAKESVoAKpEfu0GOPbvudR_-y-5U"
     })
     var endpoint = "";
-    promise.then(function(end){
-        try{
+    promise.then(function (end) {
+        try {
             endpoint = end
             formData.append("endpoint", algunoSeleccionado ? endpoint : null)
-        
+
             // Enviar datos al servidor
             fetch("guardarRegistro.php", {
                 method: "POST",
                 body: formData
             })
-            .then(response => response.text())
-            .then(data => {
-                console.log("Respuesta del servidor:", data);
-                window.location.replace("index.html")
-            })
-            .catch(error => console.error("Error en el envío:", error));
+                .then(response => response.text())
+                .then(data => {
+                    console.log(correo)
+                    console.log("Respuesta del servidor:", data);
+                    fetch("crearJWT.php",{
+                        method:"POST",
+                        body:JSON.stringify({
+                            correo:correo
+                        })
+                    })
+                    .then(response => response.text())
+                    .then(data => {
+                        var formCorreo = new FormData();
+                        formCorreo.append("correos[]",correo)
+                        formCorreo.append("asunto", "nuevo inicio de sesión")
+                        formCorreo.append("mensaje", `<p>pulsa <span><a href="localhost/proyectoPesca/verificarCliente.php?token=${data}">aqui</a></span> para verificar tu perfil</p>`)
+                        fetch("mandarCorreo.php", {
+                            method: "POST",
+                            body: formCorreo
+                        })
+                            .then(response => response.text())
+                            .then(data => console.log(data))
+                            .catch(error => console.error(error))
+                            var a = document.createElement("a")
+                            a.setAttribute("href", "pantallaVerificar.php")
+                            a.click();
+                    })
+                })
+                .catch(error => console.error("Error en el envío:", error));
         }
-        catch(error){
-            console.log("error al resolver el endpoint:"+error)
+        catch (error) {
+            console.log("error al resolver el endpoint:" + error)
         }
     })
 
 });
-document.getElementById("notis").addEventListener("change", function(){
-    if(this.checked){
-        Notification.requestPermission(function(permission){
-            if(permission == "granted"){
+document.getElementById("notis").addEventListener("change", function () {
+    if (this.checked) {
+        Notification.requestPermission(function (permission) {
+            if (permission == "granted") {
                 console.log("el usuario ha permitido las notificaciones")
             }
-            else{
+            else {
                 console.log("el usuario ha denegado las notificaciones")
             }
         })

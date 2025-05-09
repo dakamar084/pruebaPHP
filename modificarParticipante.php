@@ -3,8 +3,6 @@
 require 'conexion.php';
 
 if($_SERVER['REQUEST_METHOD']=="POST"){
-    var_dump($_POST);
-
     $id_participante = $_POST["id_participante"];
     $nombre = $_POST["nombre"];
     $apellidos = $_POST["apellidos"];
@@ -21,9 +19,10 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
     $cp = $_POST["CP"];
 
     $stm = $cone -> prepare("UPDATE participantes set nombre = ?, apellidos = ?, correo = ?, telefono = ?, pais = ?, provincia = ?,CP=?, fechaNac = ?, numLicencia = ?, numFede = ?, interes = ?, notificaciones = ?, rol = ? where id_participante = ?");
-    $stm -> bind_param("ssssssssiiiisi",$nombre, $apellidos, $correo, $telefono, $pais,$provincia,$cp, $fechaNac, $numLicencia, $numFede, $interes, $notificaciones,$rol,$id_participante);
+    $stm -> bind_param("ssssssssssiisi",$nombre, $apellidos, $correo, $telefono, $pais,$provincia,$cp, $fechaNac, $numLicencia, $numFede, $interes, $notificaciones,$rol,$id_participante);
 
     $stm -> execute();
 
-    echo $stm -> num_rows >=1 ? "participante modificado correctamente" : "no se modificaron campos";
+
+    echo $stm -> affected_rows >= 1 ? "participante modificado correctamente" : "no se modificaron campos";
 }

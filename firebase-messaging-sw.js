@@ -36,7 +36,8 @@ self.addEventListener('push', (event) => {
     }
     const notificationOptions = {
         body: data.notification?.body || 'Cuerpo por defecto',
-        icon: "/icon.png",
+        icon: "./icono2.jpg",
+        badge:"./icono2.jpg",
         data: data.data || {}
     };
     console.log('[firebase-messaging-sw.js] Mostrando notificación (push genérico):', notificationOptions);
